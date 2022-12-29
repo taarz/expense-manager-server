@@ -3,16 +3,16 @@ package code.money.expensemanager.models;
 public class Transaction {
 
 	private String userId;
-	private String base;
+	private String category;
 	private String amount;
 	private String timestamp;
 	private String type;
 	private String desc;
 
-	public Transaction(String userId, String base, String amount, String timestamp, String type, String desc) {
+	public Transaction(String userId, String category, String amount, String timestamp, String type, String desc) {
 		super();
 		this.userId = userId;
-		this.base = base;
+		this.category = category;
 		this.amount = amount;
 		this.timestamp = timestamp;
 		this.type = type;
@@ -28,11 +28,11 @@ public class Transaction {
 	}
 
 	public String getBase() {
-		return base;
+		return category;
 	}
 
 	public void setBase(String base) {
-		this.base = base;
+		this.category = base;
 	}
 
 	public String getAmount() {

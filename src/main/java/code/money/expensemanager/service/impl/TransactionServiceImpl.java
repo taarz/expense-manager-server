@@ -2,9 +2,12 @@ package code.money.expensemanager.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import code.money.expensemanager.models.Transaction;
 import code.money.expensemanager.service.TransactionService;
 
+@Service
 public class TransactionServiceImpl implements TransactionService {
 
 	@Override
