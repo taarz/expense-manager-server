@@ -1,7 +1,11 @@
 package code.money.expensemanager.models;
 
-public class Transaction {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("transaction")
+public class Transaction {
+	
 	private String userId;
 	private String category;
 	private String amount;

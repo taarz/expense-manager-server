@@ -2,13 +2,16 @@ package code.money.expensemanager.dao;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
+
 import code.money.expensemanager.models.Transaction;
 
-public interface TransactionDao {
+@Repository
+public interface TransactionDao extends MongoRepository<Transaction, String> {
 	
-	public boolean persistTransaction(Transaction transaction);
-	
+	@Query("{userId:'?0'}")
 	public List<Transaction> getTransaction(String userId);
-	
-	public boolean deleteTransaction(String userId);
+
 }
