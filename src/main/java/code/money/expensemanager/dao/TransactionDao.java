@@ -13,5 +13,7 @@ public interface TransactionDao extends MongoRepository<Transaction, String> {
 	
 	@Query("{userId:'?0'}")
 	public List<Transaction> getTransaction(String userId);
+	
+	public Transaction findByUserId(String userId);
 
 }

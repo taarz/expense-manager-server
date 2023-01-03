@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +46,38 @@ public class TransactionController {
 			responseEntity = new ResponseEntity<TransactionDto>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return responseEntity;
+	}
+
+	@PutMapping
+	public ResponseEntity<TransactionDto> editTransaction(@RequestBody Transaction transaction) {
+		TransactionDto dto = null;
+		ResponseEntity<TransactionDto> responseEntity = null;
+		try {
+			if (this.transactionService.addTransaction(transaction)) {
+				dto = new TransactionDto(transaction, null, SUCCESS, "Persisting Transaction Success");
+			} else {
+				dto = new TransactionDto(transaction, null, FAILED, "Persisting Transaction Failed");
+			}
+			responseEntity = new ResponseEntity<TransactionDto>(dto, HttpStatus.OK);
+		} catch (Exception e) {
+			dto = new TransactionDto(transaction, null, FAILED, e.toString());
+			responseEntity = new ResponseEntity<TransactionDto>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return responseEntity;
+	}
+	
+	@DeleteMapping("/{userId}")
+	public String deleteTransaction(@PathVariable String userId) {
+		try {
+			if (this.transactionService.deleteTransaction(userId)) {
+				return "Deleting Transaction " + userId + " Success";
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return "Deleting Transaction " + userId + " Failed";
 	}
 
 	@GetMapping("/{userId}")
